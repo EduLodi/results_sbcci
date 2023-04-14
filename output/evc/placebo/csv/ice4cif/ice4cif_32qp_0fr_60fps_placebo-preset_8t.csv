@@ -1,0 +1,2 @@
+codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
+EVC,ice4cif,704x576,60,0,32,37.0965,46.0831,46.2666,39.3661,488309.7600,92.669,ice4cif_32qp_0fr_60fps_placebo-preset_8t

@@ -1,0 +1,2 @@
+codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
+EVC,parkjoy2160p,3480x2160,50,0,22,37.1023,37.8783,39.1453,37.4547,180708796.8256,5392.699,parkjoy2160p_22qp_0fr_50fps_placebo-preset_4t

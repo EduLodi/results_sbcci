@@ -1,0 +1,2 @@
+codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
+EVC,icecif,352x288,30,0,27,37.812,45.3821,45.5224,39.7221,295814.1440,13.011,icecif_27qp_0fr_30fps_medium-preset_1t

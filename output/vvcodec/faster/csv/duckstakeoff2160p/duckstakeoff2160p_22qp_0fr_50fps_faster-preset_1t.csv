@@ -1,0 +1,2 @@
+codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
+VVENC,duckstakeoff2160p,3480x2160,50,0,22,32.9375,33.4628,37.3037,33.3630,205640148.5824,3592.112,duckstakeoff2160p_22qp_0fr_50fps_faster-preset_1t

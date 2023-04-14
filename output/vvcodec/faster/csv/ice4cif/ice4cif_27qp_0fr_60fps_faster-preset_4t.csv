@@ -1,0 +1,2 @@
+codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
+VVENC,ice4cif,704x576,60,0,27,40.9560,49.0482,49.3445,42.2559,1165556.736,14.701,ice4cif_27qp_0fr_60fps_faster-preset_4t

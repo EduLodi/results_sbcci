@@ -1,0 +1,2 @@
+codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
+VVENC,parkjoy720p,1280x720,50,0,37,31.9,35.34,37.74,33.06,20633630.72,13.006,parkjoy720p_37qp_0fr_50fps_12-preset_1t

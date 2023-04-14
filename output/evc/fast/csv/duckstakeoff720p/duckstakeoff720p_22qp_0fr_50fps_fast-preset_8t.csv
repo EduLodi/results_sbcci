@@ -1,0 +1,2 @@
+codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
+EVC,duckstakeoff720p,1280x720,50,0,22,36.1285,37.3069,40.1823,36.7825,43117677.7728,130.968,duckstakeoff720p_22qp_0fr_50fps_fast-preset_8t

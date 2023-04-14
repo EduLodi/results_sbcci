@@ -1,0 +1,2 @@
+codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
+EVC,parkjoy1080p,1920x1080,50,0,32,28.9977,33.6618,35.9051,30.4441,12365322.6496,110.931,parkjoy1080p_32qp_0fr_50fps_medium-preset_8t
