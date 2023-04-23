@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import os
 
 """
@@ -18,26 +19,28 @@ def draw_plot(results: dict):
     opacity = 0.8
     index = range(len(groups))
     
-
-    rects1 = ax.bar(index, results["vvcodec"].values(), bar_width,
+    rects1 = ax.bar(index, results["vvcodec"].values(), bar_width, 
                 alpha=opacity,
-                label='vvcodec')
-    rects2 = ax.bar([i + 1*bar_width for i in index], results["evc"].values(), bar_width,
+                label='vvcodec', color="#21c400")
+    rects2 = ax.bar([i + 1*bar_width for i in index], results["evc"].values(), bar_width, 
                 alpha=opacity,
-                label='evc')
-    rects3 = ax.bar([i + 2*bar_width for i in index], results["svt"].values(), bar_width,
+                label='evc', color="#0003c4")
+    rects3 = ax.bar([i + 2*bar_width for i in index], results["svt"].values(), bar_width, 
                 alpha=opacity,
-                label='svt')
+                label='svt', color="#c40000")
 
     # Set x-axis labels and fix the ticks, etc.
-    plt.tick_params(axis='x', which='both', length=0)
+    plt.tick_params(axis='x', which='both', length=0, labelsize=14)
     ax.set_xticks([i + bar_width for i in index])
     ax.set_xticklabels(groups)
-    ax.set_xlabel('Number of Threads')
-    ax.set_ylabel('Speedup (%)')
-    plt.title("Speedup vs Number of Threads")
+    ax.set_xlabel('Number of Threads', fontsize=14)
+    ax.set_ylabel('Speedup (%)', fontsize=14)
+    plt.title("Speedup vs Number of Threads", fontsize=16)
 
-    ax.legend()
+    ax.legend(fontsize=14)
+    fig = plt.gcf()
+    fig.set_size_inches(10, 6.5)
+    fig.savefig('speedup.png', dpi=100)
     plt.show()   
 
 def speedup(nthreads: list) -> dict:
@@ -52,7 +55,7 @@ def speedup(nthreads: list) -> dict:
     
     return speedup
 
-def get_average_time(codec: str, preset: str, nthreads: int):
+def get_average_time(codec: str, preset: str, nthreads: int) -> float:
     path = f"output/{codec}/{preset}/csv"
     times = [] 
 
@@ -79,7 +82,7 @@ def get_average_time(codec: str, preset: str, nthreads: int):
 
     return sum(times)/len(times)
 
-def get_individual_time(contents):
+def get_individual_time(contents: str) -> float:
     second_line = contents.split("\n")[1]
     comma_separated = second_line.split(',')
     time = comma_separated[11]
