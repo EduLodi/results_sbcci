@@ -1,8 +1,10 @@
 import os
 
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import pandas as pd
 import seaborn as sns
+import numpy as np
 
 from CodecComparator import CodecComparator
 
@@ -42,6 +44,49 @@ color_dict = {
     "evcslow": "#99004C",
     "evcplacebo": "#606060",
 }
+
+color_dict = {
+    "svt3": "#c40000",
+    "svt6": "#c40000",
+    "svt9": "#c40000",
+    "svt12": "#c40000",
+    "vvcodecfaster": "#21c400",
+    "vvcodecfast": "#21c400",
+    "vvcodecmedium": "#21c400",
+    "evcfast": "#0003c4",
+    "evcmedium": "#0003c4",
+    "evcslow": "#0003c4",
+    "evcplacebo": "#0003c4",
+}
+
+marker_dict = {
+    "svt3": "^",
+    "svt6": "v",
+    "svt9": "^",
+    "svt12": "v",
+    "vvcodecfaster": "o",
+    "vvcodecfast": "s",
+    "vvcodecmedium": "o",
+    "evcfast": "<",
+    "evcmedium": ">",
+    "evcslow": "<",
+    "evcplacebo": ">",
+}
+
+markstyle_dict = {
+    "svt3": "full",
+    "svt6": "full",
+    "svt9": "none",
+    "svt12": "none",
+    "vvcodecfaster": "none",
+    "vvcodecfast": "none",
+    "vvcodecmedium": "full",
+    "evcfast": "none",
+    "evcmedium": "none",
+    "evcslow": "full",
+    "evcplacebo": "full",
+}
+
 
 def baseline_list(codecname, videoname, metric):
     # Define dictionary with codec and video names as keys, and corresponding lists as values
@@ -188,14 +233,14 @@ bdpsnrevc = []
 
 comp = CodecComparator()
 
-mode = "BRxTIME"
+mode = "PSNRxBR"
 
 videoarray = ["icecif", "ice4cif", "harbourcif", "harbour4cif", "duckstakeoff720p", "duckstakeoff1080p", "duckstakeoff2160p", "parkjoy720p", "parkjoy1080p", "parkjoy2160p"]
 
-for thread in ["1t", "4t", "8t"]:
+for thread in ["1t"]:
 
     for video in videoarray:
-
+        fig = plt.figure(figsize=(12, 9))
         for codec in ["svt","evc","vvcodec"]:
 
             if codec == "svt" and thread == "1t":
@@ -271,11 +316,16 @@ for thread in ["1t", "4t", "8t"]:
                 brbaselist = baseline_list("evc",video,"bitrate")
                 psnrbaselist = baseline_list("evc",video,"psnr")
                 bdpsnrevc.append(comp.BD_PSNR(brbaselist,psnrbaselist,bitratelist,psnrlist))               
-
-
-                #color = color_dict[codec+preset]
-                #if mode == "PSNRxBR":
-                #    plt.plot(bitratelist, psnrlist, "o-", label=codec+preset, color = color, markersize = 5)
+                   
+                if video in ["icecif", "ice4cif", "harbourcif", "harbour4cif"]:    
+                    bitratelist = [np.log10(i/1000) for i in bitratelist]
+                else:
+                    bitratelist = [np.log10(i/1000000) for i in bitratelist]
+                color = color_dict[codec+preset]
+                marker = marker_dict[codec+preset]
+                markerstyle = markstyle_dict[codec+preset]
+                if mode == "PSNRxBR":
+                    plt.plot(bitratelist, psnrlist, "-", label=codec+preset, linewidth = 3, color=color, markersize=14, marker=marker, fillstyle=markerstyle)
                 #if mode == "PSNRxTIME":
                 #    plt.plot(timelist, psnrlist, "o-", label=codec+preset, color = color, markersize = 5)    
                 #if mode == "BRxTIME":
@@ -291,9 +341,9 @@ for thread in ["1t", "4t", "8t"]:
                 timelist = []
                 
         timeconfig = [round(value,2) for value in timeconfig]
-        heatplot(video, thread, codecconfig, timeconfig, bdratesvt, bdpsnrsvt,"SVT 0 with 8 threads")
-        heatplot(video,thread, codecconfig, timeconfig, bdratevvcodec, bdpsnrvvcodec,"VVenC slow with 8 threads")
-        heatplot(video, thread, codecconfig, timeconfig, bdrateevc, bdpsnrevc, "EVC slow with 8 threads")
+        #heatplot(video, thread, codecconfig, timeconfig, bdratesvt, bdpsnrsvt,"SVT 0 with 8 threads")
+        #heatplot(video,thread, codecconfig, timeconfig, bdratevvcodec, bdpsnrvvcodec,"VVenC slow with 8 threads")
+        #heatplot(video, thread, codecconfig, timeconfig, bdrateevc, bdpsnrevc, "EVC slow with 8 threads")
         codecconfig=[]
         timeconfig=[]
         bdratesvt = []
@@ -302,10 +352,13 @@ for thread in ["1t", "4t", "8t"]:
         bdpsnrvvcodec = []
         bdrateevc = []
         bdpsnrevc = []
-        #if mode == "PSNRxBR":
-        #    plt.xlabel('Bitrate')
-        #    plt.ylabel('PSNR')
-        #    plt.title(video + " " + thread + ' PNSR vs Bitrate')
+        if mode == "PSNRxBR":
+            if video in ["icecif", "ice4cif", "harbourcif", "harbour4cif"]:
+                plt.xlabel('Bitrate (Kbps) [logarithmic]', fontsize=16)
+            else:
+                plt.xlabel('Bitrate (Mbps) [logarithmic]', fontsize=16)
+            plt.ylabel('PSNR (dB)', fontsize=14)
+            plt.title(video + " encoded with " + thread + 'hread PNSR vs Bitrate', fontsize=20)
         #if mode == "BRxTIME":
         #    plt.xlabel('Time(s)')
         #    plt.ylabel('Bitrate')
@@ -323,9 +376,11 @@ for thread in ["1t", "4t", "8t"]:
         #    plt.ylabel('VMAF score')
         #    plt.title(video + ' VMAF vs Bitrate')
 
-        #plt.legend()
-        #plt.grid()
+        plt.legend(fontsize=14, loc='lower right')
+        plt.tick_params(axis='both', which='major', labelsize=14)
+        plt.grid()
         #plt.show()
+        plt.savefig('initialresultssbcci/1thread/PSNRxBR/'+video+'.pdf', dpi=200, bbox_inches='tight')
     
     psnrlist = []
     bitratelist = []
