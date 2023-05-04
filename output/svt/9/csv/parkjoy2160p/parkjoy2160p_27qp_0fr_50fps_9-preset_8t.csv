@@ -1,2 +1,2 @@
 codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
-VVENC,parkjoy2160p,3480x2160,50,0,27,37.23,37.94,39.2,37.56,184451430.4,24.976,parkjoy2160p_27qp_0fr_50fps_9-preset_8t
+SVT,parkjoy2160p,3480x2160,50,0,27,37.23,37.94,39.2,37.56,184451430.4,24.976,parkjoy2160p_27qp_0fr_50fps_9-preset_8t

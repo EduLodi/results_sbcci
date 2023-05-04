@@ -1,2 +1,2 @@
 codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
-VVENC,duckstakeoff2160p,3480x2160,50,0,27,35.73,35.47,38.0,35.98,431365273.6,24726.883,duckstakeoff2160p_27qp_0fr_50fps_0-preset_8t
+SVT,duckstakeoff2160p,3480x2160,50,0,27,35.73,35.47,38.0,35.98,431365273.6,24726.883,duckstakeoff2160p_27qp_0fr_50fps_0-preset_8t

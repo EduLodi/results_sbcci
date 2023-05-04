@@ -1,2 +1,2 @@
 codec,video,resolution,fps,number of frames,qp,ypsnr,upsnr,vpsnr,psnr,bitrate,time(s),optional settings
-VVENC,harbourcif,352x288,30,0,22,39.22,45.28,47.14,40.97,1918023.68,25.017,harbourcif_22qp_0fr_30fps_3-preset_8t
+SVT,harbourcif,352x288,30,0,22,39.22,45.28,47.14,40.97,1918023.68,25.017,harbourcif_22qp_0fr_30fps_3-preset_8t
