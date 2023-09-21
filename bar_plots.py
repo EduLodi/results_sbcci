@@ -40,7 +40,7 @@ def draw_plot(results: dict):
     ax.legend(fontsize=14)
     fig = plt.gcf()
     fig.set_size_inches(10, 6.5)
-    fig.savefig('speedup.png', dpi=100)
+    fig.savefig('speedup.png', dpi=300)
     plt.show()   
 
 def speedup(nthreads: list) -> dict:

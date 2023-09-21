@@ -325,7 +325,8 @@ for thread in ["1t"]:
                 marker = marker_dict[codec+preset]
                 markerstyle = markstyle_dict[codec+preset]
                 if mode == "PSNRxBR":
-                    plt.plot(bitratelist, psnrlist, "-", label=codec+preset, linewidth = 3, color=color, markersize=14, marker=marker, fillstyle=markerstyle)
+                    bitratelist = [np.log2(br) for br in bitratelist]
+                    plt.plot(bitratelist, psnrlist, "o", label=codec+preset, linewidth = 3, color=color, markersize=14, marker=marker, fillstyle=markerstyle)
                 #if mode == "PSNRxTIME":
                 #    plt.plot(timelist, psnrlist, "o-", label=codec+preset, color = color, markersize = 5)    
                 #if mode == "BRxTIME":
